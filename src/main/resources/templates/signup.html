@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Sign Up - Blueberry Bakery</title>
+    <link href="https://fonts.googleapis.com/css2?family=Julius+Sans+One&display=swap" rel="stylesheet">
+    <style>
+
+
+     .logo {
+        height: 90px;
+        width: 90px;
+        display: block;
+    }
+
+    nav {
+        background-color: #FFF9D3;
+        display: flex;
+        align-items: center;
+        gap: 80px;
+        padding: 10px 40px;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    nav ul {
+        display: flex;
+        gap: 180px;
+        list-style: none;
+        font-family: 'Julius Sans One', sans-serif;
+        color: #3B7A98;
+        margin: 0;
+        padding: 0;
+    }
+
+    nav ul li {
+        font-size: 25px;
+        color: #3B7A98;
+        cursor: pointer;
+    }
+
+    nav ul > li {
+        position: relative;
+    }
+
+    .has-dropdown .dropdown {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0px;
+        background-color: #FFF9D3;
+        font-family: 'Julius Sans One', sans-serif;
+        border: 1px solid #FFFFFF;
+        list-style: none;
+        z-index: 10;
+    }
+
+    .dropdown li {
+        padding: 0px;
+        margin: 0px;
+        font-size: 20px;
+    }
+
+    a {
+        text-decoration: none;
+        display: block;
+    }
+
+    .has-dropdown:hover .dropdown {
+        display: block;
+    }
+
+        body {
+          margin: 0;
+          font-family: 'Julius Sans One', sans-serif;
+          background-color: #FFFBE2;
+          color: #3B7A98;
+        }
+        .content-section {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 100vh;
+          max-width: 1500px;
+          margin: 0 auto;
+          box-sizing: border-box;
+          gap: 20px;
+        }
+        .left-image {
+          flex: 0 0 calc((100%-2*16px)/2);
+          height: 700px;
+          width: 50vw;
+          background-image: url("/images/istockphoto-588598088-612x612.jpg");
+          background-size: cover;
+          background-position: center;
+          border-radius: 10px;
+        }
+        .signup-form {
+          flex: 0 0 calc((100%-2*16px)/2);
+          height: 700px;
+          background-color: #fff9d3;
+          border-radius: 10px;
+          padding-right: 80px;
+          padding-left: 60px;
+        }
+        .signup-form h1 {
+          font-size: 32px;
+          text-align: center;
+          margin-bottom: 70px;
+        }
+        .signup-form label {
+          display: block;
+          margin-bottom: 5px;
+          font-size: 24px;
+          font-weight: 700;
+        }
+        .signup-form input {
+          width: 100%;
+          padding: 8px;
+          margin-bottom: 40px;
+          border: 1px solid #ccc;
+          border-radius: 5px;
+          font-size: 18px;
+          font-family: 'Julius Sans One', sans-serif;
+        }
+        .signup-form button {
+          width: 70%;
+          padding: 10px;
+          margin-top: 115px;
+          margin-left: 90px;
+          background-color: #3B7A98;
+          color: white;
+          border: none;
+          border-radius: 5px;
+          font-size: 21px;
+          cursor: pointer;
+          font-family: 'Julius Sans One', sans-serif;
+        }
+        .signup-form button:hover {
+          background-color: #336a82;
+        }
+    </style>
+</head>
+<body>
+<div th:replace="~{fragments/navbar :: navbar}"></div>
+
+<section class="content-section">
+    <div class="left-image"></div>
+    <div class="signup-form">
+        <h1>Sign Up</h1>
+<!--        <script>-->
+<!--            /*<![CDATA[*/-->
+<!--            alert("Alerts are showing");-->
+<!--            console.log("Alerts showing");-->
+<!--            /*]]>*/-->
+<!--        </script>-->
+        <div th:if="${errorMessage}" style="color: red; margin-bottom: 20px; text-align: center;">
+            <p th:text="${errorMessage}"> </p>
+        </div>
+        <!-- Bind to User model which now has username, password, reenterpassword -->
+        <form th:action="@{/signup}" th:object="${user}" method="post">
+            <label for="username">Username:</label>
+            <input type="text" th:field="*{username}" id="username" required/>
+
+            <label for="password">Password:</label>
+            <input type="password" th:field="*{password}" id="password" required/>
+
+            <label for="reenterpassword">Re-Enter Password:</label>
+            <input type="password" th:field="*{reenterpassword}" id="reenterpassword" required/>
+
+            <button type="submit">Sign Up</button>
+        </form>
+    </div>
+</section>
+</body>
+</html>

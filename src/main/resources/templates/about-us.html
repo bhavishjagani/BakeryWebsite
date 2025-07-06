@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>About Us - Blueberry Bakery</title>
+    <link href="https://fonts.googleapis.com/css2?family=Julius+Sans+One&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Julius Sans One', sans-serif;
+            background-color: #FFFBE2;
+            color: #3B7A98;
+        }
+
+        .content-section {
+            max-width: 1500px;
+            margin: 0 auto;
+            padding: 60px;
+            box-sizing: border-box;
+        }
+
+        .row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .row .text-block p {
+            font-size: 22px;
+        }
+
+        .text-block {
+            flex: 1;
+            text-align: center;
+        }
+
+        .text-block h1 {
+            font-size: 36px;
+            padding-bottom: 50px;
+        }
+
+        .text-block p {
+            max-width: 600px;
+            line-height: 40px;
+            letter-spacing: 2px;
+        }
+
+        .image-block {
+            flex: 1;
+            height: 400px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 10px;
+        }
+
+        .bottom-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .bottom-row .image-block {
+            flex: 1;
+            height: 400px;
+        }
+
+        .bottom-row .text-block {
+            flex: 1;
+            text-align: center;
+        }
+
+        .bottom-row .text-block h1 {
+            font-size: 36px;
+            margin-bottom: 20px;
+
+        }
+
+        .bottom-row .text-block p {
+            font-size: 20px;
+            margin-left: 30px;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <div th:replace="fragments/navbar"></div>
+
+    <section class="content-section">
+        <div class="row">
+            <div class="text-block">
+                <p>BLUEBERRY BAKERY’s products are always crafted with love. For the best experience, we only use the finest ingredients and bake each item with care and creativity.</p>
+            </div>
+            <div class="image-block" style="background-image: url('/images/MicrosoftTeams-image-132-scaled.jpg');"></div>
+        </div>
+
+        <div class="bottom-row">
+            <div class="image-block" style="background-image: url('/images/StockCake-Busy Bakery Workers_1748153912.jpg');"></div>
+            <div class="text-block">
+                <h1>Our Mission</h1>
+                <p>At Blueberry Bakery, our mission is to spread joy through freshly baked goods made with passion and purpose. We aim to create a warm, welcoming environment for our community while supporting ethical baking practices.</p>
+            </div>
+        </div>
+    </section>
+</div>
+</body>
+</html>

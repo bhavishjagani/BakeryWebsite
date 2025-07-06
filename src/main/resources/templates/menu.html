@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Blueberry Bakery | Menu</title>
+    <link href="https://fonts.googleapis.com/css2?family=Julius+Sans+One&display=swap" rel="stylesheet">
+    <style>
+        body {
+          margin: 0;
+          padding: 0;
+          font-family: 'Julius Sans One', sans-serif;
+          background-color: #FFFDF4;
+          color: #3B7A98;
+        }
+
+        nav {
+          background-color: #FFF9D3;
+          display: flex;
+          align-items: center;
+          gap: 80px;
+          padding: 10px 40px;
+        }
+
+        .logo {
+          height: 90px;
+          width: 90px;
+        }
+
+        nav ul {
+          display: flex;
+          gap: 180px;
+          list-style: none;
+          margin: 0;
+          padding: 0;
+        }
+
+        nav ul li a {
+          text-decoration: none;
+          font-size: 25px;
+          color: #3B7A98;
+        }
+
+        .container {
+          max-width: 1200px;
+          margin: 0 auto;
+          padding: 40px;
+        }
+
+        h1 {
+          text-align: center;
+          font-size: 36px;
+          margin-bottom: 40px;
+        }
+
+        .filters {
+          display: flex;
+          justify-content: space-between;
+          margin-bottom: 30px;
+          flex-wrap: wrap;
+        }
+
+        .filters select {
+          font-size: 16px;
+          padding: 5px 10px;
+          margin: 10px;
+          border: 1px solid #ccc;
+          border-radius: 8px;
+        }
+
+        .category {
+          margin-top: 40px;
+        }
+
+        .category h2 {
+          font-size: 28px;
+          border-bottom: 2px solid #3B7A98;
+          margin-bottom: 20px;
+        }
+
+        .menu-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+          gap: 30px;
+        }
+
+        .item {
+          background-color: #fff;
+          border-radius: 12px;
+          overflow: hidden;
+        }
+
+        .item img {
+          width: 100%;
+          height: 180px;
+          object-fit: cover;
+        }
+
+        .item-info {
+          padding: 15px;
+        }
+
+        .item-info h3 {
+          margin: 0;
+          font-size: 20px;
+          color: #3B7A98;
+        }
+
+        .item-info p {
+          font-size: 16px;
+          color: #555;
+          margin: 10px 0 0;
+        }
+
+        .price {
+          font-weight: bold;
+          margin-top: 5px;
+          color: #8A4FFF;
+        }
+    </style>
+</head>
+<body>
+
+<div>
+    <div th:replace="fragments/navbar"></div>
+
+    <div class="container">
+        <h1>Our Delicious Menu</h1>
+
+        <div class="filters">
+            <select>
+                <option selected>Filter by Category</option>
+                <option>Cookies</option>
+                <option>Cakes</option>
+                <option>Pastries</option>
+                <option>Breads</option>
+                <option>Muffins</option>
+            </select>
+
+            <select>
+                <option selected>Filter by Price</option>
+                <option>Under $5</option>
+                <option>$5 - $10</option>
+                <option>$10 - $15</option>
+            </select>
+        </div>
+
+        <div class="category">
+            <h2>Cookies</h2>
+            <div class="menu-grid">
+                <div class="item">
+                    <img src="/images/blueberry_cookie.jpg" alt="Blueberry Cookie">
+                    <div class="item-info">
+                        <h3>Blueberry White Choco Chip</h3>
+                        <p>Soft-baked cookie bursting with blueberries and creamy white chocolate.</p>
+                        <p class="price">$3.50</p>
+                    </div>
+                </div>
+                <div class="item">
+                    <img src="/images/choco_cookie.jpg" alt="Chocolate Cookie">
+                    <div class="item-info">
+                        <h3>Double Chocolate Chunk</h3>
+                        <p>Rich cocoa cookie loaded with chocolate chips.</p>
+                        <p class="price">$3.00</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="category">
+            <h2>Cakes</h2>
+            <div class="menu-grid">
+                <div class="item">
+                    <img src="/images/blueberry_lemon_cake.jpg" alt="Blueberry Lemon Cake">
+                    <div class="item-info">
+                        <h3>Blueberry Lemon Drizzle Cake</h3>
+                        <p>A moist lemon sponge with sweet blueberry topping and lemon glaze.</p>
+                        <p class="price">$6.50</p>
+                    </div>
+                </div>
+                <div class="item">
+                    <img src="/images/red_velvet.jpg" alt="Red Velvet Cake">
+                    <div class="item-info">
+                        <h3>Classic Red Velvet</h3>
+                        <p>Velvety red sponge layered with cream cheese frosting.</p>
+                        <p class="price">$6.00</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="category">
+            <h2>Pastries</h2>
+            <div class="menu-grid">
+                <div class="item">
+                    <img src="/images/blueberry_danish.jpg" alt="Blueberry Danish">
+                    <div class="item-info">
+                        <h3>Blueberry Danish</h3>
+                        <p>Flaky pastry filled with rich blueberry compote and a sweet glaze.</p>
+                        <p class="price">$4.00</p>
+                    </div>
+                </div>
+                <div class="item">
+                    <img src="/images/cinnamon_roll.jpg" alt="Cinnamon Roll">
+                    <div class="item-info">
+                        <h3>Cinnamon Roll</h3>
+                        <p>Swirled pastry with cinnamon sugar and cream cheese frosting.</p>
+                        <p class="price">$4.50</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="category">
+            <h2>Breads</h2>
+            <div class="menu-grid">
+                <div class="item">
+                    <img src="/images/blueberry_banana_bread.jpg" alt="Blueberry Banana Bread">
+                    <div class="item-info">
+                        <h3>Blueberry Banana Bread</h3>
+                        <p>Classic banana bread with juicy blueberries baked inside.</p>
+                        <p class="price">$5.00</p>
+                    </div>
+                </div>
+                <div class="item">
+                    <img src="/images/sourdough.jpg" alt="Sourdough Loaf">
+                    <div class="item-info">
+                        <h3>Fresh Sourdough Loaf</h3>
+                        <p>Traditional sourdough with a crispy crust and tangy taste.</p>
+                        <p class="price">$5.50</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="category">
+            <h2>Muffins</h2>
+            <div class="menu-grid">
+                <div class="item">
+                    <img src="/images/blueberry_muffin.jpg" alt="Blueberry Muffin">
+                    <div class="item-info">
+                        <h3>Classic Blueberry Muffin</h3>
+                        <p>Moist muffin filled with wild blueberries and a hint of lemon zest.</p>
+                        <p class="price">$3.75</p>
+                    </div>
+                </div>
+                <div class="item">
+                    <img src="/images/choco_muffin.jpg" alt="Chocolate Chip Muffin">
+                    <div class="item-info">
+                        <h3>Chocolate Chip Muffin</h3>
+                        <p>Golden muffin loaded with melty chocolate chips.</p>
+                        <p class="price">$3.50</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
