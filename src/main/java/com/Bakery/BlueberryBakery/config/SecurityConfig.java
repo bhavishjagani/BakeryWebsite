@@ -1,17 +1,14 @@
 package com.Bakery.BlueberryBakery.config;
-
 import com.Bakery.BlueberryBakery.service.impl.CustomUserDetailsService;
-import org.springframework.context.annotation.*;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import static org.springframework.security.config.Customizer.withDefaults;
-
+import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 public class SecurityConfig {
@@ -23,7 +20,7 @@ public class SecurityConfig {
     }
 
     @Bean
-    PasswordEncoder passwordEncoder() {
+    public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
@@ -40,8 +37,14 @@ public class SecurityConfig {
     public SecurityFilterChain adminChain(HttpSecurity http) throws Exception {
         http
                 .securityMatcher("/admin/**")
+                .authenticationProvider(authProvider())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/admin/login", "/admin/css/**", "/admin/js/**", "/admin/images/**").permitAll()
+                        .requestMatchers(
+                                "/admin/login",
+                                "/admin/css/**",
+                                "/admin/js/**",
+                                "/admin/images/**"
+                        ).permitAll()
                         .anyRequest().hasRole("ADMIN")
                 )
                 .formLogin(form -> form
@@ -56,19 +59,29 @@ public class SecurityConfig {
                         .logoutSuccessUrl("/admin/login?logout")
                         .permitAll()
                 )
-                .csrf(withDefaults());
+                .csrf(Customizer.withDefaults());
         return http.build();
     }
+
 
     @Bean
     @Order(2)
     public SecurityFilterChain userSecurity(HttpSecurity http) throws Exception {
         http
+                .securityMatcher("/**")
+                .authenticationProvider(authProvider())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/", "/about-us", "/signup", "/login", "/css/**", "/js/**", "/images/**").permitAll()
+                        .requestMatchers(
+                                "/",
+                                "/about-us",
+                                "/signup",
+                                "/login",
+                                "/css/**",
+                                "/js/**",
+                                "/images/**"
+                        ).permitAll()
                         .anyRequest().authenticated()
                 )
-                .authenticationProvider(authProvider())
                 .formLogin(form -> form
                         .loginPage("/login")
                         .loginProcessingUrl("/login")
