@@ -33,7 +33,8 @@ public class UserServiceImpl implements UserService {
         }
         try {
             repo.save(user);
-        } catch (DataIntegrityViolationException ex) {
+        }
+        catch (DataIntegrityViolationException ex) {
             // In case unique constraint triggers at DB level
             throw new IllegalArgumentException("Unable to register user: " + ex.getMessage());
         }

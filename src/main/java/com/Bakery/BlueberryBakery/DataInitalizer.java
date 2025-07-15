@@ -1,5 +1,4 @@
 package com.Bakery.BlueberryBakery;
-
 import com.Bakery.BlueberryBakery.model.User;
 import com.Bakery.BlueberryBakery.repo.UserRepository;
 import org.springframework.boot.CommandLineRunner;
@@ -17,7 +16,7 @@ public class DataInitalizer implements CommandLineRunner {
 	}
 
 	@Override
-	public void run(String... args) throws Exception {
+	public void run(String... args) {
 		if (! repo.existsByUsername("admin")) {
 			User admin = new User();
 			admin.setUsername("admin");

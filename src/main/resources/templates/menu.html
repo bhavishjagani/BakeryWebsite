@@ -126,21 +126,24 @@
         <h1>Our Delicious Menu</h1>
 
         <div class="filters">
-            <select>
-                <option selected>Filter by Category</option>
-                <option>Cookies</option>
-                <option>Cakes</option>
-                <option>Pastries</option>
-                <option>Breads</option>
-                <option>Muffins</option>
-            </select>
+<!--            <select>-->
+<!--                <option selected>Filter by Category</option>-->
+<!--                <option>Cookies</option>-->
+<!--                <option>Cakes</option>-->
+<!--                <option>Pastries</option>-->
+<!--                <option>Breads</option>-->
+<!--                <option>Muffins</option>-->
+<!--            </select>-->
 
-            <select>
-                <option selected>Filter by Price</option>
-                <option>Under $5</option>
-                <option>$5 - $10</option>
-                <option>$10 - $15</option>
-            </select>
+            <form th:action="@{/getProducts}" method="get">
+                <select name="price" th:value="${selectedRange}">
+                    <option selected>Filter by Price</option>
+                    <option value="under3">Under $3</option>
+                    <option value="from3to5">$3 - $5</option>
+                    <option value="from5to10">$5 - $10</option>
+                </select>
+                <button type="submit">Filter</button>
+            </form>
         </div>
 
         <div class="category">
@@ -162,6 +165,30 @@
                         <p class="price">$3.00</p>
                     </div>
                 </div>
+                <div class="item">
+                    <img src="/images/oatmeal_raisin.jpg" alt="Oatmeal Raisin Cookie">
+                    <div class="item-info">
+                        <h3>Oatmeal Raisin</h3>
+                        <p>Chewy oatmeal cookie packed with raisins and a hint of cinnamon.</p>
+                        <p class="price">$3.25</p>
+                    </div>
+                </div>
+                <div class="item">
+                    <img src="/images/sugar_cookie.jpg" alt="Sugar Cookie">
+                    <div class="item-info">
+                        <h3>Classic Sugar Cookie</h3>
+                        <p>Sweet and soft cookie with a light vanilla flavor and sugar crystals.</p>
+                        <p class="price">$3.00</p>
+                    </div>
+                </div>
+                <div class="item">
+                    <img src="/images/macadamia_cookie.jpg" alt="Macadamia Cookie">
+                    <div class="item-info">
+                        <h3>White Chocolate Macadamia</h3>
+                        <p>Delicate cookie with crunchy macadamia nuts and creamy white chocolate.</p>
+                        <p class="price">$3.75</p>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -181,6 +208,30 @@
                     <div class="item-info">
                         <h3>Classic Red Velvet</h3>
                         <p>Velvety red sponge layered with cream cheese frosting.</p>
+                        <p class="price">$6.00</p>
+                    </div>
+                </div>
+                <div class="item">
+                    <img src="/images/chocolate_cake.jpg" alt="Chocolate Fudge Cake">
+                    <div class="item-info">
+                        <h3>Chocolate Fudge Cake</h3>
+                        <p>Decadent layers of chocolate sponge and fudge ganache.</p>
+                        <p class="price">$6.50</p>
+                    </div>
+                </div>
+                <div class="item">
+                    <img src="/images/strawberry_shortcake.jpg" alt="Strawberry Shortcake">
+                    <div class="item-info">
+                        <h3>Strawberry Shortcake</h3>
+                        <p>Light vanilla sponge with whipped cream and fresh strawberries.</p>
+                        <p class="price">$6.25</p>
+                    </div>
+                </div>
+                <div class="item">
+                    <img src="/images/carrot_cake.jpg" alt="Carrot Cake">
+                    <div class="item-info">
+                        <h3>Spiced Carrot Cake</h3>
+                        <p>Moist carrot cake with walnuts and a rich cream cheese frosting.</p>
                         <p class="price">$6.00</p>
                     </div>
                 </div>
@@ -206,6 +257,30 @@
                         <p class="price">$4.50</p>
                     </div>
                 </div>
+                <div class="item">
+                    <img src="/images/croissant.jpg" alt="Butter Croissant">
+                    <div class="item-info">
+                        <h3>Butter Croissant</h3>
+                        <p>Flaky and buttery croissant with a golden crust.</p>
+                        <p class="price">$3.75</p>
+                    </div>
+                </div>
+                <div class="item">
+                    <img src="/images/apple_turnover.jpg" alt="Apple Turnover">
+                    <div class="item-info">
+                        <h3>Apple Turnover</h3>
+                        <p>Puff pastry filled with spiced apple filling and a light glaze.</p>
+                        <p class="price">$4.25</p>
+                    </div>
+                </div>
+                <div class="item">
+                    <img src="/images/cheese_danish.jpg" alt="Cheese Danish">
+                    <div class="item-info">
+                        <h3>Cheese Danish</h3>
+                        <p>Sweet pastry filled with creamy cheese and a touch of vanilla.</p>
+                        <p class="price">$4.00</p>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -228,6 +303,30 @@
                         <p class="price">$5.50</p>
                     </div>
                 </div>
+                <div class="item">
+                    <img src="/images/garlic_bread.jpg" alt="Garlic Bread">
+                    <div class="item-info">
+                        <h3>Garlic Herb Bread</h3>
+                        <p>Freshly baked loaf with roasted garlic and Italian herbs.</p>
+                        <p class="price">$4.75</p>
+                    </div>
+                </div>
+                <div class="item">
+                    <img src="/images/zucchini_bread.jpg" alt="Zucchini Bread">
+                    <div class="item-info">
+                        <h3>Zucchini Walnut Bread</h3>
+                        <p>Moist zucchini bread with crunchy walnuts and warm spices.</p>
+                        <p class="price">$5.00</p>
+                    </div>
+                </div>
+                <div class="item">
+                    <img src="/images/rye_bread.jpg" alt="Rye Bread">
+                    <div class="item-info">
+                        <h3>Old-Fashioned Rye</h3>
+                        <p>Hearty rye loaf with a rich flavor and chewy texture.</p>
+                        <p class="price">$5.25</p>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -248,6 +347,30 @@
                         <h3>Chocolate Chip Muffin</h3>
                         <p>Golden muffin loaded with melty chocolate chips.</p>
                         <p class="price">$3.50</p>
+                    </div>
+                </div>
+                <div class="item">
+                    <img src="/images/banana_muffin.jpg" alt="Banana Muffin">
+                    <div class="item-info">
+                        <h3>Banana Nut Muffin</h3>
+                        <p>Fluffy muffin with mashed bananas and chopped walnuts.</p>
+                        <p class="price">$3.75</p>
+                    </div>
+                </div>
+                <div class="item">
+                    <img src="/images/lemon_poppy_muffin.jpg" alt="Lemon Poppy Muffin">
+                    <div class="item-info">
+                        <h3>Lemon Poppyseed Muffin</h3>
+                        <p>Bright lemon muffin with crunchy poppyseeds and a citrus glaze.</p>
+                        <p class="price">$3.75</p>
+                    </div>
+                </div>
+                <div class="item">
+                    <img src="/images/corn_muffin.jpg" alt="Corn Muffin">
+                    <div class="item-info">
+                        <h3>Sweet Corn Muffin</h3>
+                        <p>Golden corn muffin with a lightly sweet and crumbly texture.</p>
+                        <p class="price">$3.25</p>
                     </div>
                 </div>
             </div>

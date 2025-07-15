@@ -1,5 +1,4 @@
 package com.Bakery.BlueberryBakery.controller;
-
 import com.Bakery.BlueberryBakery.model.User;
 import com.Bakery.BlueberryBakery.service.impl.UserService;
 import org.springframework.stereotype.Controller;

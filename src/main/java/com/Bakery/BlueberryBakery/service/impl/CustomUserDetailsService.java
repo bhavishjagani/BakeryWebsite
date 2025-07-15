@@ -7,13 +7,11 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import com.Bakery.BlueberryBakery.model.User;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
-
     private final UserRepository userRepository;
 
     public CustomUserDetailsService(UserRepository userRepository) {
@@ -43,5 +41,3 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     }
 }
-
-//create git repo

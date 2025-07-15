@@ -4,8 +4,6 @@
     <title>Sign Up - Blueberry Bakery</title>
     <link href="https://fonts.googleapis.com/css2?family=Julius+Sans+One&display=swap" rel="stylesheet">
     <style>
-
-
      .logo {
         height: 90px;
         width: 90px;
@@ -147,12 +145,6 @@
     <div class="left-image"></div>
     <div class="signup-form">
         <h1>Sign Up</h1>
-<!--        <script>-->
-<!--            /*<![CDATA[*/-->
-<!--            alert("Alerts are showing");-->
-<!--            console.log("Alerts showing");-->
-<!--            /*]]>*/-->
-<!--        </script>-->
         <div th:if="${errorMessage}" style="color: red; margin-bottom: 20px; text-align: center;">
             <p th:text="${errorMessage}"> </p>
         </div>

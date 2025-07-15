@@ -18,6 +18,12 @@ public class AdminController {
     public String dashboard() {
         return "admin-dashboard";
     }
+//    @GetMapping("/admin/logout")
+//    public String logout(@RequestParam(value = "logout", required = false) String logout, Model model) {
+//        if (logout != null) {
+//            model.addAttribute("message", "You have been logged out.");
+//        }
+//        return "logout";
+//    }
 }
-
 //try making logout mapping for admin

@@ -63,7 +63,6 @@ public class SecurityConfig {
         return http.build();
     }
 
-
     @Bean
     @Order(2)
     public SecurityFilterChain userSecurity(HttpSecurity http) throws Exception {
@@ -75,6 +74,7 @@ public class SecurityConfig {
                                 "/",
                                 "/about-us",
                                 "/signup",
+                                "/menu",
                                 "/login",
                                 "/css/**",
                                 "/js/**",

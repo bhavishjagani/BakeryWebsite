@@ -92,7 +92,12 @@
             </li>
             <li><a th:href="@{/about-us}">ABOUT US</a></li>
             <li><a th:href="@{/admin/login}">LOGIN</a></li>
-            <li><a th:href="@{/logout}">LOGOUT</a></li>
+            <li th:if="${#request.remoteUser!=null}">
+                <form th:action="@{/admin/logout}" method="post">
+                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+                    <button type="submit">Logout</button>
+                </form>
+            </li>
         </ul>
     </nav>
 </div>
