@@ -1,11 +1,11 @@
 package com.Bakery.BlueberryBakery.controller;
-import com.Bakery.BlueberryBakery.model.Product;
+import  com.Bakery.BlueberryBakery.model.Product;
 import com.Bakery.BlueberryBakery.service.impl.ProductService;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 enum PriceRange {
@@ -39,26 +39,24 @@ public class ProductController {
         List<Product> products = productService.findAll();
 
         if (price != null && !price.isEmpty()) {
-            switch (price) {
-                case "under3":
-                    products = products.stream()
-                            .filter(p -> p.getPrice() < 3)
-                            .collect(Collectors.toList());
-                    break;
-                case "from3to5":
-                    products = products.stream()
-                            .filter(p -> p.getPrice() >= 3 && p.getPrice() <= 5)
-                            .collect(Collectors.toList());
-                    break;
-                case "from5to10":
-                    products = products.stream()
-                            .filter(p -> p.getPrice() > 5 && p.getPrice() <= 10)
-                            .collect(Collectors.toList());
-                    break;
-            }
+            products = switch (price) {
+                case "under3" -> products.stream()
+                        .filter(p -> p.getPrice() < 3)
+                        .collect(Collectors.toList());
+                case "from3to5" -> products.stream()
+                        .filter(p -> p.getPrice() >= 3 && p.getPrice() <= 5)
+                        .collect(Collectors.toList());
+                case "from5to10" -> products.stream()
+                        .filter(p -> p.getPrice() > 5 && p.getPrice() <= 10)
+                        .collect(Collectors.toList());
+                default -> products;
+            };
         }
 
-        model.addAttribute("products", products);
+        Map<String, List<Product>> grouped = products.stream()
+                .collect(Collectors.groupingBy(Product::getProductType));
+
+        model.addAttribute("groupedProducts", grouped);
         model.addAttribute("selectedRange", price);
         return "menu";
     }

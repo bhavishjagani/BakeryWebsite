@@ -1,11 +1,9 @@
 package com.Bakery.BlueberryBakery.model;
-import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 @Entity
 @Table(name = "products")
 @Getter
@@ -32,6 +30,7 @@ public class Product {
     @Column(nullable = false)
     private String imageURL;
 
+    public Product(Object o, String blueberryWhiteChocoChip, String s, String cookies, double v, String s1) {}
     public Long getId() {
         return id;
     }
