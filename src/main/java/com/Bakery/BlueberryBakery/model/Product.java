@@ -30,7 +30,13 @@ public class Product {
     @Column(nullable = false)
     private String imageURL;
 
-    public Product(Object o, String blueberryWhiteChocoChip, String s, String cookies, double v, String s1) {}
+    public Product(String title, String description, String productType, double price, String imageURL) {
+        this.title = title;
+        this.description = description;
+        this.productType = productType;
+        this.price = price;
+        this.imageURL = imageURL;
+    }
     public Long getId() {
         return id;
     }

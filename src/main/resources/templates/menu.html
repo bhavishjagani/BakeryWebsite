@@ -77,6 +77,32 @@
           margin: 10px;
         }
 
+        .categories {
+          display: flex;
+          justify-content: space-between;
+          margin-bottom: 30px;
+          flex-wrap: wrap;
+        }
+
+        .categories select {
+          font-size: 16px;
+          padding: 5px 10px;
+          margin: 10px;
+          border: 1px solid #ccc;
+          border-radius: 8px;
+        }
+
+        .categories button {
+          font-size: 16px;
+          padding: 6px 12px;
+          background-color: #3B7A98;
+          color: white;
+          border: none;
+          border-radius: 8px;
+          cursor: pointer;
+          margin: 10px;
+        }
+
         .category {
           margin-top: 40px;
         }
@@ -138,14 +164,26 @@
         <h1>Our Delicious Menu</h1>
 
         <div class="filters">
-            <form th:action="@{/getProducts}" method="get">
-                <select name="price">
+            <form th:action="@{/getProducts/getProductsByPrice}" method="get">
+                <select name="price" onchange="this.form.submit()">
                     <option value="">Filter by Price</option>
                     <option value="under3" th:selected="${selectedRange == 'under3'}">Under $3</option>
                     <option value="from3to5" th:selected="${selectedRange == 'from3to5'}">$3 - $5</option>
                     <option value="from5to10" th:selected="${selectedRange == 'from5to10'}">$5 - $10</option>
                 </select>
-                <button type="submit">Filter</button>
+            </form>
+        </div>
+
+        <div class="categories">
+            <form th:action="@{/getProducts/getProductsByType}" method="get">
+                <select name="productType" onchange="this.form.submit()">
+                    <option value="">Filter by Product</option>
+                    <option value="Muffins" th:selected="${product == 'Muffins'}">Muffins</option>
+                    <option value="Cakes" th:selected="${product == 'Cakes'}">Cakes</option>
+                    <option value="Cookies" th:selected="${product == 'Cookies'}">Cookies</option>
+                    <option value="Pastries" th:selected="${product == 'Pastries'}">Pastries</option>
+                    <option value="Breads" th:selected="${product == 'Breads'}">Breads</option>
+                </select>
             </form>
         </div>
 
@@ -173,5 +211,4 @@
 </div>
 </body>
 </html>
-<!-- hacker rank set problem -->
-<!-- organize products in hashmap, add if condition so all products show immediately when menu is opened -->
+<!-- COMBINE BOTH FILTERS -->

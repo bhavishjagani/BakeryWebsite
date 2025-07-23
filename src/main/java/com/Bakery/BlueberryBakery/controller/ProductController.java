@@ -34,11 +34,11 @@ public class ProductController {
         this.productService = productService;
     }
 
-    @GetMapping
+    @GetMapping("/getProductsByPrice")
     public String getProductsByPrice(@RequestParam(value = "price", required = false) String price, Model model) {
         List<Product> products = productService.findAll();
 
-        if (price != null && !price.isEmpty()) {
+        if (price != null && !price.isBlank()) {
             products = switch (price) {
                 case "under3" -> products.stream()
                         .filter(p -> p.getPrice() < 3)
@@ -60,4 +60,38 @@ public class ProductController {
         model.addAttribute("selectedRange", price);
         return "menu";
     }
+
+    @GetMapping("/getProductsByType")
+    public String getProductsByType(@RequestParam(value = "productType", required = false) String productType, Model model) {
+        List<Product> products = productService.findAll();
+
+        if (productType != null && !productType.isBlank()) {
+            products = switch (productType) {
+                case "Muffins" -> products.stream()
+                        .filter(p -> p.getProductType().equals("Muffins"))
+                        .collect(Collectors.toList());
+                case "Cakes" -> products.stream()
+                        .filter(p -> p.getProductType().equals("Cakes"))
+                        .collect(Collectors.toList());
+                case "Cookies" -> products.stream()
+                        .filter(p -> p.getProductType().equals("Cookies"))
+                        .collect(Collectors.toList());
+                case "Pastries" -> products.stream()
+                        .filter(p -> p.getProductType().equals("Pastries"))
+                        .collect(Collectors.toList());
+                case "Breads" -> products.stream()
+                        .filter(p -> p.getProductType().equals("Breads"))
+                        .collect(Collectors.toList());
+                default -> products;
+            };
+        }
+
+        Map<String, List<Product>> grouped = products.stream()
+                .collect(Collectors.groupingBy(Product::getProductType));
+
+        model.addAttribute("groupedProducts", grouped);
+        model.addAttribute("product", productType);
+        return "menu";
+    }
+
 }

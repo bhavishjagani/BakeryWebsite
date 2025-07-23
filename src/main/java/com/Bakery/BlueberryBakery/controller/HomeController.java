@@ -8,9 +8,9 @@ public class HomeController {
     public String home() {
         return "home";
     }
-    @GetMapping("/menu")
+    @GetMapping("/getProducts?price=")
     public String showMenuPage() {
-        return "menu";
+        return "/getProducts?price=";
     }
     @GetMapping("/about-us")
     public String aboutus() {
