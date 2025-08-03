@@ -1,4 +1,5 @@
 package com.Bakery.BlueberryBakery.config;
+
 import com.Bakery.BlueberryBakery.service.impl.CustomUserDetailsService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -78,7 +79,8 @@ public class SecurityConfig {
                                 "/login",
                                 "/css/**",
                                 "/js/**",
-                                "/images/**"
+                                "/images/**",
+                                "/error"
                         ).permitAll()
                         .anyRequest().authenticated()
                 )

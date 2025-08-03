@@ -4,7 +4,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class BlueberryBakeryApplication {
-	public static void main(String[] args) {
-		SpringApplication.run(BlueberryBakeryApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(BlueberryBakeryApplication.class, args);
+    }
 }

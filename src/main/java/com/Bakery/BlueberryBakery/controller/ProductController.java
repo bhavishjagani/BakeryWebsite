@@ -1,25 +1,30 @@
 package com.Bakery.BlueberryBakery.controller;
-import  com.Bakery.BlueberryBakery.model.Product;
+
+import com.Bakery.BlueberryBakery.model.Product;
 import com.Bakery.BlueberryBakery.service.impl.ProductService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
 enum PriceRange {
-    UNDER3(0,3),
-    FROM3TO5(3,5),
-    FROM5TO10(5,10);
+    UNDER3(0, 3),
+    FROM3TO5(3, 5),
+    FROM5TO10(5, 10);
     final int min, max;
-    PriceRange(int min, int max) {this.min=min; this.max=max;}
+
+    PriceRange(int min, int max) {
+        this.min = min;
+        this.max = max;
+    }
 
     public static PriceRange getPriceRange(String range) {
         try {
             return PriceRange.valueOf(range.toUpperCase());
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             return null;
         }
     }

@@ -1,100 +1,100 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <title>Blueberry Bakery</title>
-  <link href="https://fonts.googleapis.com/css2?family=Julius+Sans+One&display=swap" rel="stylesheet">
-  <style>
-    body {
-        margin: 0;
-        padding: 0;
-    }
+    <title>Blueberry Bakery</title>
+    <link href="https://fonts.googleapis.com/css2?family=Julius+Sans+One&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
 
-    .logo {
-        height: 90px;
-        width: 90px;
-        display: block;
-    }
+        .logo {
+            height: 90px;
+            width: 90px;
+            display: block;
+        }
 
-    nav {
-        background-color: #FFF9D3;
-        display: flex;
-        align-items: center;
-        gap: 80px;
-        padding: 10px 40px;
-        width: 100%;
-        box-sizing: border-box;
-    }
+        nav {
+            background-color: #FFF9D3;
+            display: flex;
+            align-items: center;
+            gap: 80px;
+            padding: 10px 40px;
+            width: 100%;
+            box-sizing: border-box;
+        }
 
-    nav ul {
-        display: flex;
-        gap: 180px;
-        list-style: none;
-        font-family: 'Julius Sans One', sans-serif;
-        color: #3B7A98;
-        margin: 0;
-        padding: 0;
-    }
+        nav ul {
+            display: flex;
+            gap: 180px;
+            list-style: none;
+            font-family: 'Julius Sans One', sans-serif;
+            color: #3B7A98;
+            margin: 0;
+            padding: 0;
+        }
 
-    nav ul li {
-        font-size: 25px;
-        color: #3B7A98;
-        cursor: pointer;
-    }
+        nav ul li {
+            font-size: 25px;
+            color: #3B7A98;
+            cursor: pointer;
+        }
 
-    nav ul > li {
-        position: relative;
-    }
+        nav ul > li {
+            position: relative;
+        }
 
-    .has-dropdown .dropdown {
-        display: none;
-        position: absolute;
-        top: 100%;
-        left: 0px;
-        background-color: #FFF9D3;
-        font-family: 'Julius Sans One', sans-serif;
-        border: 1px solid #FFFFFF;
-        list-style: none;
-        z-index: 10;
-    }
+        .has-dropdown .dropdown {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0px;
+            background-color: #FFF9D3;
+            font-family: 'Julius Sans One', sans-serif;
+            border: 1px solid #FFFFFF;
+            list-style: none;
+            z-index: 10;
+        }
 
-    .dropdown li {
-        padding: 0px;
-        margin: 0px;
-        font-size: 20px;
-    }
+        .dropdown li {
+            padding: 0px;
+            margin: 0px;
+            font-size: 20px;
+        }
 
-    a {
-        text-decoration: none;
-        display: block;
-    }
+        a {
+            text-decoration: none;
+            display: block;
+        }
 
-    .has-dropdown:hover .dropdown {
-        display: block;
-    }
+        .has-dropdown:hover .dropdown {
+            display: block;
+        }
 
-  </style>
+    </style>
 </head>
 <body>
 <div>
-  <div th:replace="~{fragments/navbar :: navbar}"></div>
-    <img class="logo" th:src="@{/images/BLUEBERRY%20BAKERY%20(1).png}" alt="Logo">
-    <ul>
-      <li><a th:href="@{/}">HOME</a></li>
-      <li class="has-dropdown"><a th:href="@{/getProducts/getProductsByPrice}">MENU</a>
-        <ul class="dropdown">
-          <li><a href="#">COOKIES</a></li>
-          <li><a href="#">CAKES</a></li>
-          <li><a href="#">PASTRIES</a></li>
-          <li><a href="#">BREADS</a></li>
-          <li><a href="#">MUFFINS</a></li>
+    <nav th:fragment="navbar">
+        <img class="logo" th:src="@{/images/BLUEBERRY%20BAKERY%20(1).png}" alt="Logo">
+        <ul>
+            <li><a th:href="@{/}">HOME</a></li>
+            <li class="has-dropdown"><a th:href="@{/getProducts/getProductsByPrice}">MENU</a>
+                <ul class="dropdown">
+                    <li><a th:href="@{/getProducts/getProductsByType?productType=Cookies}">COOKIES</a></li>
+                    <li><a th:href="@{/getProducts/getProductsByType?productType=Cakes}">CAKES</a></li>
+                    <li><a th:href="@{/getProducts/getProductsByType?productType=Pastries}">PASTRIES</a></li>
+                    <li><a th:href="@{/getProducts/getProductsByType?productType=Breads}">BREADS</a></li>
+                    <li><a th:href="@{/getProducts/getProductsByType?productType=Muffins}">MUFFINS</a></li>
 
+                </ul>
+            </li>
+            <li><a th:href="@{/about-us}">ABOUT US</a></li>
+            <li><a th:href="@{/signup}">SIGN UP</a></li>
+            <li><a th:href="@{/login}">LOGIN</a></li>
         </ul>
-      </li>
-      <li><a th:href="@{/about-us}">ABOUT US</a></li>
-      <li><a th:href="@{/signup}">SIGN UP</a></li>
-      <li><a th:href="@{/login}">LOGIN</a></li>
-    </ul>
-  </div>
+    </nav>
 </div>
 </body>
 </html>

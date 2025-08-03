@@ -16,13 +16,13 @@ public class DataLoader {
     @PostConstruct
     public void loadData() {
         if (productService.findAll().isEmpty()) {
-            productService.save(new Product("Blueberry White Choco Chip", "Soft-baked cookie bursting with blueberries and creamy white chocolate.", "Cookies", 3.50, "/images/blueberry_cookie.jpg"));
-            productService.save(new Product( "Double Chocolate Chunk", "Rich cocoa cookie loaded with chocolate chips.", "Cookies", 3.00, "/images/choco_cookie.jpg"));
+            productService.save(new Product("Blueberry White Choco Chip", "Soft-baked cookie bursting with blueberries and creamy white chocolate.", "Cookies", 3.50, "/images/blueberry-cookie.jpg"));
+            productService.save(new Product("Double Chocolate Chunk", "Rich cocoa cookie loaded with chocolate chips.", "Cookies", 3.00, "/images/choco-cookie.jpg"));
             productService.save(new Product("Oatmeal Raisin", "Chewy oatmeal cookie packed with raisins and a hint of cinnamon.", "Cookies", 3.25, "/images/oatmeal_raisin.jpg"));
             productService.save(new Product("Classic Sugar Cookie", "Sweet and soft cookie with a light vanilla flavor and sugar crystals.", "Cookies", 3.00, "/images/sugar_cookie.jpg"));
             productService.save(new Product("White Chocolate Macadamia", "Delicate cookie with crunchy macadamia nuts and creamy white chocolate.", "Cookies", 3.75, "/images/macadamia_cookie.jpg"));
 
-            productService.save(new Product("Blueberry Lemon Drizzle Cake", "A moist lemon sponge with sweet blueberry topping and lemon glaze.", "Cakes", 6.50, "/images/blueberry_lemon_cake.jpg"));
+            productService.save(new Product("Blueberry Lemon Drizzle Cake", "A moist lemon sponge  with sweet blueberry topping and lemon glaze.", "Cakes", 6.50, "/images/blueberry_lemon_cake.jpg"));
             productService.save(new Product("Classic Red Velvet", "Velvety red sponge layered with cream cheese frosting.", "Cakes", 6.00, "/images/red_velvet.jpg"));
             productService.save(new Product("Chocolate Fudge Cake", "Decadent layers of chocolate sponge and fudge ganache.", "Cakes", 6.50, "/images/chocolate_cake.jpg"));
             productService.save(new Product("Strawberry Shortcake", "Light vanilla sponge with whipped cream and fresh strawberries.", "Cakes", 6.25, "/images/strawberry_shortcake.jpg"));
@@ -40,11 +40,11 @@ public class DataLoader {
             productService.save(new Product("Zucchini Walnut Bread", "Moist zucchini bread with crunchy walnuts and warm spices.", "Breads", 5.00, "/images/zucchini_bread.jpg"));
             productService.save(new Product("Old-Fashioned Rye", "Hearty rye loaf with a rich flavor and chewy texture.", "Breads", 5.25, "/images/rye_bread.jpg"));
 
-            productService.save(new Product("Classic Blueberry Muffin", "Moist muffin filled with wild blueberries and a hint of lemon zest.", "Muffins", 3.75, "C:\\Users\\Bhavi\\Downloads\\BlueberryBakery\\BlueberryBakery\\src\\main\\resources\\static\\images\\product.images\\classic-blueberry-muffin.jpg"));
-            productService.save(new Product("Chocolate Chip Muffin", "Golden muffin loaded with melty chocolate chips.", "Muffins", 3.50, "C:\\Users\\Bhavi\\Downloads\\BlueberryBakery\\BlueberryBakery\\src\\main\\resources\\static\\images\\product.images\\chocolate-chip-muffin.jpg"));
+            productService.save(new Product("Classic Blueberry Muffin", "Moist muffin filled with wild blueberries and a hint of lemon zest.", "Muffins", 3.75, "/images/classic-blueberry-muffin.jpg"));
+            productService.save(new Product("Chocolate Chip Muffin", "Golden muffin loaded with melty chocolate chips.", "Muffins", 3.50, "/images/chocolate-chip-muffin.jpg"));
             productService.save(new Product("Banana Nut Muffin", "Fluffy muffin with mashed bananas and chopped walnuts.", "Muffins", 3.75, "/images/banana-nut-muffin.jpg"));
-            productService.save(new Product("Lemon Poppyseed Muffin", "Bright lemon muffin with crunchy poppyseeds and a citrus glaze.", "Muffins", 3.75, "C:\\Users\\Bhavi\\Downloads\\BlueberryBakery\\BlueberryBakery\\src\\main\\resources\\static\\images\\product.images\\lemon-poppy-seed-muffin.jpg"));
-            productService.save(new Product("Sweet Corn Muffin", "Golden corn muffin with a lightly sweet and crumbly texture.", "Muffins", 3.25, "C:\\Users\\Bhavi\\Downloads\\BlueberryBakery\\BlueberryBakery\\src\\main\\resources\\static\\images\\product.images\\sweet-corn-muffin.jpg"));
+            productService.save(new Product("Lemon Poppyseed Muffin", "Bright lemon muffin with crunchy poppyseeds and a citrus glaze.", "Muffins", 3.75, "/images/lemon-poppy-seed-muffin.jpg"));
+            productService.save(new Product("Sweet Corn Muffin", "Golden corn muffin with a lightly sweet and crumbly texture.", "Muffins", 3.25, "/images/sweet-corn-muffin.jpg"));
         }
     }
 }

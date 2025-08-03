@@ -1,4 +1,5 @@
 package com.Bakery.BlueberryBakery.controller;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -8,10 +9,12 @@ public class HomeController {
     public String home() {
         return "home";
     }
+
     @GetMapping("/getProducts?price=")
     public String showMenuPage() {
         return "/getProducts?price=";
     }
+
     @GetMapping("/about-us")
     public String aboutus() {
         return "about-us";

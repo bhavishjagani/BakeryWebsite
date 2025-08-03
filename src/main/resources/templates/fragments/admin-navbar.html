@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <title>Blueberry Bakery</title>
     <link href="https://fonts.googleapis.com/css2?family=Julius+Sans+One&display=swap" rel="stylesheet">
@@ -27,7 +27,7 @@
 
         nav ul {
             display: flex;
-            gap: 180px;
+            gap: 255px;
             list-style: none;
             font-family: 'Julius Sans One', sans-serif;
             color: #3B7A98;
@@ -76,7 +76,7 @@
 </head>
 <body>
 <div>
-    <nav th:fragment="admin-navbar">
+    <nav th:fragment="fragments/admin-navbar">
         <img class="logo" th:src="@{/images/BLUEBERRY%20BAKERY%20(1).png}" alt="Logo">
         <ul>
             <li><a th:href="@{/}">HOME</a></li>
@@ -91,11 +91,17 @@
                 </ul>
             </li>
             <li><a th:href="@{/about-us}">ABOUT US</a></li>
-            <li><a th:href="@{/admin/login}">LOGIN</a></li>
-            <li th:if="${#request.remoteUser!=null}">
-                <form th:action="@{/admin/logout}" method="post">
-                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
-                    <button type="submit">Logout</button>
+            <li sec:authorize="isAnonymous()">
+                <a th:href="@{/admin/login}">LOGIN</a>
+            </li>
+
+            <li sec:authorize="isAuthenticated()">
+                <form th:action="@{/admin/logout}" method="post" style="display:inline">
+                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+                    <button type="submit"
+                            style="background: none; border: none; padding: 0; color: #3B7A98; cursor: pointer; font-size: 25px; font-family: 'Julius Sans One', sans-serif; margin: 0;">
+                        LOGOUT
+                    </button>
                 </form>
             </li>
         </ul>

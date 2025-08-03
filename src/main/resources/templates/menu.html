@@ -124,6 +124,7 @@
           background-color: #fff;
           border-radius: 12px;
           overflow: hidden;
+          padding: 15px 0px 0px 0px;
         }
 
         .item img {
@@ -153,6 +154,15 @@
           margin-top: 5px;
           color: #8A4FFF;
         }
+
+        .cart {
+            padding: 10px;
+            background-color: #7292c4;
+            color: #fcfcfc;
+            font-size: 10px;
+            font-family: 'Julius Sans One', sans-serif;
+            width: 250px;
+
     </style>
 </head>
 <body>
@@ -192,12 +202,14 @@
                 <h2 th:text="${categoryEntry.key}">Category</h2>
                 <div class="menu-grid">
                     <div class="item" th:each="product : ${categoryEntry.value}">
+                        <div class="image-block" style="background-image: url({product.imageURL});"></div>
                         <img th:src="@{${product.imageURL}}" th:alt="${product.title}">
                         <div class="item-info">
                             <h3 th:text="${product.title}">Product Title</h3>
                             <p th:text="${product.description}">Product description</p>
                             <p class="price"
                                th:text="${'$' + #numbers.formatDecimal(product.price, 1, '2', 'POINT')}">Price</p>
+                            <button class="cart">Add to Cart</button>
                         </div>
                     </div>
                 </div>

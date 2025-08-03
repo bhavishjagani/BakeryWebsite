@@ -1,4 +1,5 @@
 package com.Bakery.BlueberryBakery.controller;
+
 import com.Bakery.BlueberryBakery.model.User;
 import com.Bakery.BlueberryBakery.service.impl.UserService;
 import org.springframework.stereotype.Controller;
@@ -35,14 +36,12 @@ public class AuthController {
         }
         try {
             userService.register(user);
-        }
-        catch (IllegalArgumentException e)   {
+        } catch (IllegalArgumentException e) {
             System.out.println("catch 1");
             model.addAttribute("errorMessage", e.getMessage());
             System.out.println(e.getMessage());
             return "signup";
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             System.out.println("catch 2");
             model.addAttribute("errorMessage", "Registration failed " + e.getMessage());
             return "signup";
