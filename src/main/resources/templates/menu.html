@@ -156,12 +156,23 @@
         }
 
         .cart {
-            padding: 10px;
-            background-color: #7292c4;
-            color: #fcfcfc;
-            font-size: 10px;
-            font-family: 'Julius Sans One', sans-serif;
-            width: 250px;
+          width: 100%;
+          padding: 12px 0;
+          margin-top: 15px;
+          background-color: #3B7A98;
+          color: white;
+          border: none;
+          border-radius: 8px;
+          font-size: 21px;
+          font-family: 'Julius Sans One', sans-serif;
+          cursor: pointer;
+          text-align: center;
+          display: block;
+        }
+
+        .cart:hover {
+          background-color: #336a82;
+        }
 
     </style>
 </head>
@@ -209,7 +220,10 @@
                             <p th:text="${product.description}">Product description</p>
                             <p class="price"
                                th:text="${'$' + #numbers.formatDecimal(product.price, 1, '2', 'POINT')}">Price</p>
-                            <button class="cart">Add to Cart</button>
+                            <form th:action="@{/add-to-cart}" method="post">
+                                <input type="hidden" name="productId" th:value="${product.id}" />
+                                <button class="cart" type="submit">Add to Cart</button>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -223,4 +237,3 @@
 </div>
 </body>
 </html>
-<!-- COMBINE BOTH FILTERS -->

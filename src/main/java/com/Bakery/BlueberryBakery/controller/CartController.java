@@ -11,24 +11,9 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
-public class HomeController {
+public class CartController {
 
     private static List<String> cart = new ArrayList<>();
-
-    @GetMapping("/")
-    public String home() {
-        return "home";
-    }
-
-    @GetMapping("/getProducts?price=")
-    public String showMenuPage() {
-        return "/getProducts?price=";
-    }
-
-    @GetMapping("/about-us")
-    public String aboutus() {
-        return "about-us";
-    }
 
     @GetMapping("/cart")
     public String viewCart(Map<String, Object> model) {
