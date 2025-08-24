@@ -5,6 +5,7 @@ import com.Bakery.BlueberryBakery.repo.ProductRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -22,5 +23,11 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public List<Product> findAll() {
         return repo.findAll();
+    }
+
+    @Override
+    public Product getProductById(Long id) {
+        Optional<Product> product = repo.findById(id);
+        return product.orElse(null);
     }
 }

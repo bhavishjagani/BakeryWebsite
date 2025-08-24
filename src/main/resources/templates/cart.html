@@ -4,13 +4,12 @@
     <title>Cart - Blueberry Bakery</title>
     <link href="https://fonts.googleapis.com/css2?family=Julius+Sans+One&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
-
     <style>
         body {
             margin: 0;
             padding: 0;
             font-family: 'Julius Sans One', sans-serif;
-            background-color: #FFF9D3;
+            background-color: #FFFDF4;
             color: #3B7A98;
         }
         .container {
@@ -21,15 +20,6 @@
             border-bottom: 2px solid #3B7A98;
             padding-bottom: 10px;
         }
-        ul {
-            list-style: none;
-            padding: 0;
-        }
-        li {
-            padding: 10px;
-            border-bottom: 1px solid #3B7A98;
-            font-size: 20px;
-        }
         .empty-message {
             font-size: 22px;
             margin-top: 20px;
@@ -37,15 +27,78 @@
         .back-btn {
             margin-top: 20px;
             display: inline-block;
-            padding: 10px 20px;
+            padding: 12px 24px;
             border: 2px solid #3B7A98;
             color: #3B7A98;
             text-decoration: none;
             border-radius: 8px;
+            font-size: 18px;
         }
         .back-btn:hover {
             background-color: #3B7A98;
             color: #FFF9D3;
+        }
+
+        /* Cart Items Layout */
+        .cart-items {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .cart-item {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            background-color: #ffffff;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .cart-item img {
+            width: 120px;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+        .item-details {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .item-title {
+            font-size: 22px;
+            font-weight: bold;
+        }
+        .item-quantity,
+        .item-price,
+        .item-total {
+            font-size: 18px;
+            margin-top: 6px;
+        }
+        .material-symbols-outlined {
+           font-size: 18px;
+           color: #3B7A98;
+           cursor: pointer;
+        }
+        .remove {
+            text-align: right;
+        }
+        .del-button {
+            background-color: #ffffff;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border-width: 0;
+            border-radius: 10px;
+        }
+        .material-symbols-outlined:hover {
+            color: #2e5d75;
+        }
+        .total-section {
+            margin-top: 30px;
+            font-size: 24px;
+            font-weight: bold;
+            text-align: right;
         }
     </style>
 </head>
@@ -55,15 +108,33 @@
 <div class="container">
     <h1>Your Cart</h1>
 
-    <div th:if="${#lists.isEmpty(cart)}" class="empty-message">
+    <div th:if="${#maps.isEmpty(cartItems)}" class="empty-message">
         Your cart is empty.
     </div>
 
-    <ul th:if="${!#lists.isEmpty(cart)}">
-        <li th:each="item : ${cart}" th:text="${item}"></li>
-    </ul>
+    <div class="cart-items" th:if="${!#maps.isEmpty(cartItems)}">
+        <div class="cart-item" th:each="entry : ${cartItems}">
+            <img th:src="@{${entry.value.product.imageURL}}" alt="Product Image">
+            <div class="item-details">
+                <div class="item-title" th:text="${entry.value.product.title}"></div>
+                <div class="item-quantity">Quantity: <span th:text="${entry.value.quantity}"></span></div>
+                <div class="item-price">Price: <span th:text="${'$' + #numbers.formatDecimal(entry.value.product.price, 1, '2', 'POINT')}"></span></div>
+                <div class="item-total">Total: <span th:text="${'$' + #numbers.formatDecimal(entry.value.product.price * entry.value.quantity, 1, '2', 'POINT')}"></span></div>
+            </div>
+            <div class="remove">
+                <form th:action="@{/delete}" method="post">
+                    <input type="hidden" name="productId" th:value="${entry.value.product.id}"/>
+                    <button class="del-button" type="submit"><span class="material-symbols-outlined">delete</span></button>
+                </form>
+            </div>
+        </div>
+    </div>
 
-    <a class="back-btn" th:href="@{/getProducts}">Continue Shopping</a>
+    <div class="total-section">
+        Total: <span th:text="${'$' + #numbers.formatDecimal(total, 1, '2', 'POINT')}"></span>
+    </div>
+
+    <a class="back-btn" th:href="@{/getProducts/getProductsByPrice}">Continue Shopping</a>
 </div>
 </body>
 </html>
