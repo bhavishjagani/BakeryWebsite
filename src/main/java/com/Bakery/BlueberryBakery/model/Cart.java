@@ -1,38 +1,84 @@
 package com.Bakery.BlueberryBakery.model;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
+import jakarta.persistence.*;
+import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
 
+@Entity
+@Table(name = "carts")
 public class Cart {
-    private final Map<Long, CartItem> items = new LinkedHashMap<>();
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    public void add(Product p) {
-        CartItem exists = items.get(p.getId());
-        if (exists == null) {
-            items.put(p.getId(), new CartItem(p, 1));
-        } else {
-            exists.setQuantity(exists.getQuantity() + 1);
-        }
+    @Column(nullable = false, unique = true)
+    private String username;
+
+    private Instant createdAt = Instant.now();
+
+    @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<CartItem> cartItems = new ArrayList<>();
+
+    public Cart() {}
+
+    public Cart(String username) {
+        this.username = username;
+        this.createdAt = Instant.now();
     }
 
-    public void remove(Product p) {
-        CartItem exists = items.get(p.getId());
-        if (exists != null) {
-            if (exists.getQuantity() > 1) {
-                exists.setQuantity(exists.getQuantity() - 1);
-            } else {
-                items.remove(p.getId());
+    public void addItem(CartItem item) {
+        cartItems.add(item);
+        item.setCart(this);
+    }
+
+    public void addProduct(Product product, int quantity) {
+        for (CartItem item : cartItems) {
+            if (item.getProduct().getId().equals(product.getId())) {
+                item.incrementQuantity(quantity);
+                return;
             }
         }
+        CartItem newItem = new CartItem(product, quantity);
+        addItem(newItem);
     }
 
-    public Map<Long, CartItem> getItems() {
-        return items;
+    public void removeItem(CartItem item) {
+        cartItems.remove(item);
+        item.setCart(null);
     }
 
     public double getTotal() {
-        return items.values().stream()
+        return cartItems.stream()
                 .mapToDouble(item -> item.getProduct().getPrice() * item.getQuantity())
                 .sum();
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public Instant getCreatedAt() {
+        return createdAt;
+    }
+
+    public List<CartItem> getCartItems() {
+        return cartItems;
+    }
+
+    public void setCartItems(List<CartItem> cartItems) {
+        this.cartItems = cartItems;
     }
 }
