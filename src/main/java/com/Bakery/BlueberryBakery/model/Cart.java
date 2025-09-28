@@ -15,16 +15,37 @@ public class Cart {
     @Column(nullable = false, unique = true)
     private String username;
 
-    private Instant createdAt = Instant.now();
+    @Column(nullable = false, updatable = false)
+    private Instant createdAt;
+
+    public void setCreatedAt(Instant createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CartItem> cartItems = new ArrayList<>();
+
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
 
     public Cart() {}
 
     public Cart(String username) {
         this.username = username;
-        this.createdAt = Instant.now();
+    }
+
+    @PrePersist
+    public void onCreate() {
+        if (this.createdAt == null) this.createdAt = Instant.now();
     }
 
     public void addItem(CartItem item) {
@@ -39,8 +60,7 @@ public class Cart {
                 return;
             }
         }
-        CartItem newItem = new CartItem(product, quantity);
-        addItem(newItem);
+        addItem(new CartItem(product, quantity));
     }
 
     public void removeItem(CartItem item) {
@@ -50,35 +70,17 @@ public class Cart {
 
     public double getTotal() {
         return cartItems.stream()
-                .mapToDouble(item -> item.getProduct().getPrice() * item.getQuantity())
+                .mapToDouble(i -> i.getProduct().getPrice() * i.getQuantity())
                 .sum();
     }
 
-    public Long getId() {
-        return id;
-    }
+    // getters / setters
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
+    public String getUsername() { return username; }
+    public void setUsername(String username) { this.username = username; }
+    public Instant getCreatedAt() { return createdAt; }
+    public List<CartItem> getCartItems() { return cartItems; }
+    public void setCartItems(List<CartItem> cartItems) { this.cartItems = cartItems; }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public Instant getCreatedAt() {
-        return createdAt;
-    }
-
-    public List<CartItem> getCartItems() {
-        return cartItems;
-    }
-
-    public void setCartItems(List<CartItem> cartItems) {
-        this.cartItems = cartItems;
-    }
 }

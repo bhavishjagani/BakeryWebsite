@@ -87,6 +87,8 @@ public class Product {
     public void setImageURL(String imageURL) {
         this.imageURL = imageURL;
     }
-
-
 }
+
+//Other functionalities
+
+// contact page, order history for logged in users (also cart items still show no matter logged in or not), favorite menu items, checkout page, admin features, reviews, profile page

@@ -6,8 +6,10 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional
 public class ProductServiceImpl implements ProductService {
     private final ProductRepository repo;
 
@@ -21,13 +23,15 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<Product> findAll() {
         return repo.findAll();
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Product getProductById(Long id) {
-        Optional<Product> product = repo.findById(id);
-        return product.orElse(null);
+        return repo.findById(id)
+                .orElseThrow(() -> new java.util.NoSuchElementException("Product not found: " + id));
     }
 }

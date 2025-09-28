@@ -27,6 +27,10 @@ public class User {
     @Transient
     private String reenterpassword;
 
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @JoinColumn(name = "cart", nullable = false)
+    private Cart cart;
+
     public String getPassword() {
         return password;
     }
@@ -53,5 +57,30 @@ public class User {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setReenterpassword(String reenterpassword) {
+        this.reenterpassword = reenterpassword;
+    }
+
+    public Cart getCart() {
+        return cart;
+    }
+
+    public void setCart(Cart cart) {
+        this.cart = cart;
+    }
+
+    public void connectCart(Cart cart) {
+        this.cart = cart;
+        cart.setUser(this);
     }
 }

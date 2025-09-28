@@ -77,6 +77,7 @@ public class SecurityConfig {
                                 "/signup",
                                 "/getProducts/**",
                                 "/login",
+                                "/cart",
                                 "/css/**",
                                 "/js/**",
                                 "/images/**",

@@ -4,8 +4,10 @@ import com.Bakery.BlueberryBakery.model.Cart;
 import com.Bakery.BlueberryBakery.repo.CartRepository;
 import com.Bakery.BlueberryBakery.service.impl.CartService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional
 public class CartServiceImpl implements CartService {
 
     private final CartRepository cartRepository;
@@ -20,11 +22,14 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Cart getCartById(Long id) {
         return cartRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Cart not found with id: " + id));
     }
 
+    @Override
+    @Transactional(readOnly = true)
     public Cart getCartByUsername(String username) {
         return cartRepository.findByUsername(username)
                 .orElseThrow(() -> new RuntimeException("Cart not found for username: " + username));
