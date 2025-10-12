@@ -28,7 +28,6 @@ public class User {
     private String reenterpassword;
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    @JoinColumn(name = "cart", nullable = false)
     private Cart cart;
 
     public String getPassword() {

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <title>Blueberry Bakery</title>
 
@@ -91,6 +92,26 @@
             color: #2e5d75;
         }
 
+        .logout-button {
+            background: none;
+            border: none;
+            color: #3B7A98;
+            font-size: 25px;
+            font-family: 'Julius Sans One', sans-serif;
+            cursor: pointer;
+            padding: 0;
+            margin: 0;
+        }
+
+        .logout-button:hover {
+            color: #2e5d75;
+        }
+
+        .username-greeting {
+            font-size: 20px;
+            color: #3B7A98;
+        }
+
     </style>
 </head>
 <body>
@@ -109,8 +130,20 @@
                 </ul>
             </li>
             <li><a th:href="@{/about-us}">ABOUT US</a></li>
-            <li><a th:href="@{/signup}">SIGN UP</a></li>
-            <li><a th:href="@{/login}">LOGIN</a></li>
+
+            <!-- Show SIGN UP and LOGIN when user is NOT logged in -->
+            <li sec:authorize="!isAuthenticated()"><a th:href="@{/signup}">SIGN UP</a></li>
+            <li sec:authorize="!isAuthenticated()"><a th:href="@{/login}">LOGIN</a></li>
+
+            <!-- Show username and LOGOUT when user IS logged in -->
+            <li sec:authorize="isAuthenticated()">
+                <span class="username-greeting">Hello, <span sec:authentication="name"></span>!</span>
+            </li>
+            <li sec:authorize="isAuthenticated()">
+                <form th:action="@{/logout}" method="post" style="margin: 0;">
+                    <button type="submit" class="logout-button">LOGOUT</button>
+                </form>
+            </li>
 
             <li class="cart-button">
                 <a th:href="@{/cart}">

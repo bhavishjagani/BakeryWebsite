@@ -3,8 +3,10 @@ package com.Bakery.BlueberryBakery.controller;
 
 import com.Bakery.BlueberryBakery.model.Cart;
 import com.Bakery.BlueberryBakery.model.Product;
+import com.Bakery.BlueberryBakery.model.User;
 import com.Bakery.BlueberryBakery.repo.CartRepository;
 import com.Bakery.BlueberryBakery.repo.ProductRepository;
+import com.Bakery.BlueberryBakery.repo.UserRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -18,10 +20,12 @@ public class CartController {
 
     private final CartRepository cartRepository;
     private final ProductRepository productRepository;
+    private final UserRepository userRepository;
 
-    public CartController(CartRepository cartRepository, ProductRepository productRepository) {
+    public CartController(CartRepository cartRepository, ProductRepository productRepository, UserRepository userRepository) {
         this.cartRepository = cartRepository;
         this.productRepository = productRepository;
+        this.userRepository = userRepository;
     }
 
     // GET /cart: load cart + initialize items while TX is open, then pass plain list to the view
@@ -31,9 +35,17 @@ public class CartController {
         if (principal == null) return "redirect:/login";
         String username = principal.getName();
 
-        // load cart with items (see @EntityGraph below) or create a fresh one
+        // load cart with items or create a fresh one
         Cart cart = cartRepository.findByUsername(username)
-                .orElseGet(() -> cartRepository.save(new Cart(username)));
+                .orElseGet(() -> {
+                    User user = userRepository.findByUsername(username);
+                    if (user == null) {
+                        throw new NoSuchElementException("User not found: " + username);
+                    }
+                    Cart newCart = new Cart(username);
+                    newCart.setUser(user);
+                    return cartRepository.save(newCart);
+                });
 
         // initialize lazy collection within TX
         cart.getCartItems().size();
@@ -53,7 +65,15 @@ public class CartController {
         String username = principal.getName();
 
         Cart cart = cartRepository.findByUsername(username)
-                .orElseGet(() -> cartRepository.save(new Cart(username)));
+                .orElseGet(() -> {
+                    User user = userRepository.findByUsername(username);
+                    if (user == null) {
+                        throw new NoSuchElementException("User not found: " + username);
+                    }
+                    Cart newCart = new Cart(username);
+                    newCart.setUser(user);
+                    return cartRepository.save(newCart);
+                });
 
         // find product inside TX
         Product product = productRepository.findById(productId)
